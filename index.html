@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="riskAmount">Risk of balance (USD)</label>
+    <input type="text" id="riskAmount">
+
+    <br>
+
+    <label for="balance">Balance (USD)</label>
+    <input type="text" id="balance">
+
+    <br>
+
+    <label for="balance">Your Order (USD)</label>
+    <input type="text" id="order">
+
+    <br>
+
+    <button id="button1">Calculate</button>
+    <br>
+
+    <h3 id="resultLabel"></h3>
+</body>
+
+<script>
+    const button = document.getElementById('button1');
+
+    button.onclick = () => {
+        const riskAmount = document.getElementById("riskAmount").value;
+        const balance = document.getElementById('balance').value;
+        const order = document.getElementById('order').value;
+
+        const percent = riskAmount / balance * 100
+
+        const result = Number(percent) * Number(balance) / 100
+        console.log(result)
+        const stopLoss = result / 0.20
+        document.getElementById('resultLabel').innerText = "Your Risk Amount: " + result + " USD" + "\n" +
+        "Your Stop loss: " + (Number(order) - ((stopLoss * 10) / 100000)) + "\n" +
+        "Your Take Profit: " + ((((stopLoss* 3) * 10) / 100000) + Number(order))
+
+    };
+</script>
+
+</html>
